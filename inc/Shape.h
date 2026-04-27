@@ -1,7 +1,7 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 
-#include <GL/freeflut.h>
+#include <GL/freeglut.h>
 #include <GL/gl.h>
 
 class Shape {
