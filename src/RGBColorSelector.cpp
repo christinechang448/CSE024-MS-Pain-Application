@@ -2,8 +2,13 @@
 #include <FL/Enumerations.H>
 #include <FL/fl_draw.H>
 #include <sstream>
+#include <algorithm>
 
 using namespace bobcat;
+
+static int clamp255(int v) {
+    return std::max(0, std::min(255, v));
+}
 
 void ColorSelector::sliderCb(Fl_Widget*, void* self) {
     static_cast<ColorSelector*>(self)->onSliderChange();
