@@ -98,42 +98,39 @@ ColorSelector::ColorSelector(int x, int y, int w, int h) : Group(x, y, w, h) {
     int sliderW = w - 2*pad - 2*bumpW - 8;
 
     // RED
-    rDec = new Button(x + pad, sliderY, bumpW, sliderRowH, "-");
-    redSlider = new Fl_Value_Slider(sliderX, sliderY + 4, sliderW, sliderRowH - 8);
+    rDec = new Image(x + pad, sliderY, bumpW, sliderRowH, "./assets/minus.png");
+    redSlider = new Fl_Slider(sliderX, sliderY + 4, sliderW, sliderRowH - 8);
     redSlider->type(FL_HORIZONTAL);
     redSlider->bounds(0, 255);
     redSlider->step(1);
     redSlider->value(0);
-    redSlider->textsize(0);
     redSlider->color(FL_DARK1);
     redSlider->selection_color(fl_rgb_color(220, 70, 60));
-    rInc = new Button(x + pad + bumpW + 4 + sliderW + 4, sliderY, bumpW, sliderRowH, "+");
+    rInc = new Image(x + pad + bumpW + 4 + sliderW + 4, sliderY, bumpW, sliderRowH, "./assets/plus.png");
 
     // Green
     int greenY = sliderY + sliderRowH + 4;
-    gDec = new Button(x + pad, greenY, bumpW, sliderRowH, "-");
-    greenSlider = new Fl_Value_Slider(sliderX, greenY + 4, sliderW, sliderRowH - 8);
+    gDec = new Image(x + pad, greenY, bumpW, sliderRowH, "./assets/minus.png");
+    greenSlider = new Fl_Slider(sliderX, greenY + 4, sliderW, sliderRowH - 8);
     greenSlider->type(FL_HORIZONTAL);
     greenSlider->bounds(0, 255);
     greenSlider->step(1);
     greenSlider->value(0);
-    greenSlider->textsize(0);
     greenSlider->color(FL_DARK1);
     greenSlider->selection_color(fl_rgb_color(80, 170, 90));
-    gInc = new Button(x + pad + bumpW + 4 + sliderW + 4, greenY, bumpW, sliderRowH, "+");
+    gInc = new Image(x + pad + bumpW + 4 + sliderW + 4, greenY, bumpW, sliderRowH, "./assets/plus.png");
 
     // Blue
     int blueY = greenY + sliderRowH + 4;
-    bDec = new Button(x + pad, blueY, bumpW, sliderRowH, "-");
-    blueSlider = new Fl_Value_Slider(sliderX, blueY + 4, sliderW, sliderRowH - 8);
+    bDec = new Image(x + pad, blueY, bumpW, sliderRowH, "./assets/minus.png");
+    blueSlider = new Fl_Slider(sliderX, blueY + 4, sliderW, sliderRowH - 8);
     blueSlider->type(FL_HORIZONTAL);
     blueSlider->bounds(0, 255);
     blueSlider->step(1);
     blueSlider->value(0);
-    blueSlider->textsize(0);
     blueSlider->color(FL_DARK1);
     blueSlider->selection_color(fl_rgb_color(70, 140, 230));
-    bInc = new Button(x + pad + bumpW + 4 + sliderW + 4, blueY, bumpW, sliderRowH, "+");
+    bInc = new Image(x + pad + bumpW + 4 + sliderW + 4, blueY, bumpW, sliderRowH, "./assets/plus.png");
 
     // Color labels
     int labelY = blueY + sliderRowH + pad;

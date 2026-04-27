@@ -6,7 +6,7 @@
 Circle::Circle() {
     x = 0.0;
     y = 0.0;
-    radius = 0.15f;
+    radius = 0.2;
     r = 0.0;
     g = 0.0;
     b = 0.0;
@@ -15,7 +15,7 @@ Circle::Circle() {
 Circle::Circle(float x, float y, float r, float g, float b) {
     this->x = x;
     this->y = y;
-    radius = 0.15f;
+    radius = 0.2;
     this->r = r;
     this->g = g;
     this->b = b;
@@ -24,11 +24,10 @@ Circle::Circle(float x, float y, float r, float g, float b) {
 void Circle::draw() {
     glColor3f(r, g, b);
 
-    glBegin(GL_TRIANGLE_FAN);
-        glVertex2f(x, y);
-        for (int i = 0; i <= 36; i++) {
-            float angle = 2.0f * M_PI * i / 36.0f;
-            glVertex2f(x + radius * cos(angle), y + radius * sin(angle));
+    glBegin(GL_POLYGON);
+        float inc = 2 * M_PI / 60;
+        for (float theta = 0; theta <= 2 * M_PI; theta += inc) {
+            glVertex2f(x + radius * cos(theta), y + radius * sin(theta));
         }
     glEnd();
 
@@ -36,14 +35,14 @@ void Circle::draw() {
         glColor3f(0.0f, 0.0f, 0.0f);
         glLineWidth(2);
         glBegin(GL_LINES);
-            glVertex2f(x - radius, y - radius);
-            glVertex2f(x + radius, y - radius);
-            glVertex2f(x + radius, y - radius);
-            glVertex2f(x + radius, y + radius);
-            glVertex2f(x + radius, y + radius);
-            glVertex2f(x - radius, y + radius);
-            glVertex2f(x - radius, y + radius);
-            glVertex2f(x - radius, y - radius);
+            glVertex2f(x - rx, y - ry);
+            glVertex2f(x + rx, y - ry);
+            glVertex2f(x + rx, y - ry);
+            glVertex2f(x + rx, y + ry);
+            glVertex2f(x + rx, y + ry);
+            glVertex2f(x - rx, y + ry);
+            glVertex2f(x - rx, y + ry);
+            glVertex2f(x - rx, y - ry);
         glEnd();
     }
 }

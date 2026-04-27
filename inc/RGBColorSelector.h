@@ -2,22 +2,22 @@
 #define COLOR_SELECTOR_H
 
 #include <bobcat_ui/all.h>
-#include <FL/Fl_Value_Slider.H>
+#include <FL/Fl_Slider.H>
 #include <Color.h>
 
 class ColorSelector : public bobcat::Group {
     bobcat::Button*  swatch;
 
-    Fl_Value_Slider* redSlider;
-    Fl_Value_Slider* greenSlider;
-    Fl_Value_Slider* blueSlider;
+    Fl_Slider* redSlider;
+    Fl_Slider* greenSlider;
+    Fl_Slider* blueSlider;
 
-    bobcat::Button* rDec;
-    bobcat::Button* rInc;
-    bobcat::Button* gDec;
-    bobcat::Button* gInc;
-    bobcat::Button* bDec;
-    bobcat::Button* bInc;
+    bobcat::Image* rDec;
+    bobcat::Image* rInc;
+    bobcat::Image* gDec;
+    bobcat::Image* gInc;
+    bobcat::Image* bDec;
+    bobcat::Image* bInc;
 
     bobcat::Button* redLabel;
     bobcat::Button* greenLabel;

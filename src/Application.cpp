@@ -111,8 +111,8 @@ Application::Application() {
     dragging = false;
 
     int toolbarW = 100;
-    int canvasW = 600;
-    int canvasH = 400;
+    int canvasW = 500;
+    int canvasH = 500;
     int colorH = 260;
 
     int winW = toolbarW + canvasW;

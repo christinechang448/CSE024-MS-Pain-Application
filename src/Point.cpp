@@ -5,7 +5,7 @@
 Point::Point() {
     x = 0.0;
     y = 0.0;
-    size = 7.0f;
+    size = 7.0;
     r = 0.0;
     g = 0.0;
     b = 0.0;
@@ -14,7 +14,7 @@ Point::Point() {
 Point::Point(float x, float y) {
     this->x = x;
     this->y = y;
-    size = 7.0f;
+    size = 7.0;
     r = 0.0;
     g = 0.0;
     b = 0.0;
@@ -23,7 +23,7 @@ Point::Point(float x, float y) {
 Point::Point(float x, float y, float r, float g, float b) {
     this->x = x;
     this->y = y;
-    size = 7.0f;
+    size = 7.0;
     this->r = r;
     this->g = g;
     this->b = b;

@@ -246,21 +246,18 @@ void Canvas::deleteSelected() {
 void Canvas::moveSelected(float dx, float dy) {
     if (selected) {
         selected->translate(dx, dy);
-        clearRedo();
     }
 }
 
 void Canvas::resizeSelected(float factor) {
     if (selected) {
         selected->resize(factor);
-        clearRedo();
     }
 }
 
 void Canvas::recolorSelected(float r, float g, float b) {
     if (selected) {
         selected->setColor(r, g, b);
-        clearRedo();
     }
 }
 
@@ -275,7 +272,6 @@ void Canvas::bringToFront() {
             break;
         }
     }
-    clearRedo();
 }
 
 void Canvas::sendToBack() {
@@ -289,7 +285,6 @@ void Canvas::sendToBack() {
             break;
         }
     }
-    clearRedo();
 }
 
 void Canvas::render() {
