@@ -1,4 +1,4 @@
-#include <ColorSelector.h>
+#include <RGBColorSelector.h>
 #include <FL/Enumerations.H>
 #include <FL/fl_draw.H>
 #include <sstream>
