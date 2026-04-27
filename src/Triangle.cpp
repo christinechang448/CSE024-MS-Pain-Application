@@ -49,8 +49,12 @@ void Triangle::draw() {
 bool Triangle::contains(float px, float py) {
     float dx = px - x;
     float dy = py - y;
-    if (dx < 0) dx = -dx;
-    if (dy < 0) dy = -dy;
+    if (dx < 0){
+        dx = -dx;
+    }
+    if (dy < 0) {
+        dy = -dy;
+    }
     return dx <= base/2 && dy <= height/2;
 }
 

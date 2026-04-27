@@ -6,8 +6,12 @@
 using namespace bobcat;
 
 int ColorSelector::clamp255(int v) {
-    if (v < 0) return 0;
-    if (v > 255) return 255;
+    if (v < 0){
+        return 0;
+    }
+    if (v > 255){
+        return 255;
+    }
     return v;
 }
 
@@ -66,7 +70,6 @@ Color ColorSelector::getColor() const {
 }
 
 ColorSelector::ColorSelector(int x, int y, int w, int h) : Group(x, y, w, h) {
-    // Layout constants
     int pad = 10;
     int swatchH = 50;
     int sliderRowH = 32;
@@ -74,18 +77,18 @@ ColorSelector::ColorSelector(int x, int y, int w, int h) : Group(x, y, w, h) {
     int valueRowH = 30;
     int bumpW = 28;
 
-    // Swatch (live preview)
+    // the swatch thingy
     swatch = new Button(x + pad, y + pad, w - 2*pad, swatchH, "");
     swatch->box(FL_FLAT_BOX);
     swatch->color(fl_rgb_color(0, 0, 0));
     swatch->deactivate();
 
-    // Slider rows: each has - [slider] +
+    //slider stuff
     int sliderY = y + pad + swatchH + pad;
     int sliderX = x + pad + bumpW + 4;
     int sliderW = w - 2*pad - 2*bumpW - 8;
 
-    // Red row
+    // RED
     rDec = new Button(x + pad, sliderY, bumpW, sliderRowH, "-");
     redSlider = new Fl_Value_Slider(sliderX, sliderY + 4, sliderW, sliderRowH - 8);
     redSlider->type(FL_HORIZONTAL);
@@ -97,7 +100,7 @@ ColorSelector::ColorSelector(int x, int y, int w, int h) : Group(x, y, w, h) {
     redSlider->selection_color(fl_rgb_color(220, 70, 60));
     rInc = new Button(x + pad + bumpW + 4 + sliderW + 4, sliderY, bumpW, sliderRowH, "+");
 
-    // Green row
+    // Green
     int greenY = sliderY + sliderRowH + 4;
     gDec = new Button(x + pad, greenY, bumpW, sliderRowH, "-");
     greenSlider = new Fl_Value_Slider(sliderX, greenY + 4, sliderW, sliderRowH - 8);
@@ -110,7 +113,7 @@ ColorSelector::ColorSelector(int x, int y, int w, int h) : Group(x, y, w, h) {
     greenSlider->selection_color(fl_rgb_color(80, 170, 90));
     gInc = new Button(x + pad + bumpW + 4 + sliderW + 4, greenY, bumpW, sliderRowH, "+");
 
-    // Blue row
+    // Blue
     int blueY = greenY + sliderRowH + 4;
     bDec = new Button(x + pad, blueY, bumpW, sliderRowH, "-");
     blueSlider = new Fl_Value_Slider(sliderX, blueY + 4, sliderW, sliderRowH - 8);
@@ -123,7 +126,7 @@ ColorSelector::ColorSelector(int x, int y, int w, int h) : Group(x, y, w, h) {
     blueSlider->selection_color(fl_rgb_color(70, 140, 230));
     bInc = new Button(x + pad + bumpW + 4 + sliderW + 4, blueY, bumpW, sliderRowH, "+");
 
-    // Color name labels
+    // Color labels
     int labelY = blueY + sliderRowH + pad;
     int colW = (w - 2*pad) / 3;
     redLabel   = new Button(x + pad + 0*colW, labelY, colW, labelRowH, "RED");
@@ -133,7 +136,7 @@ ColorSelector::ColorSelector(int x, int y, int w, int h) : Group(x, y, w, h) {
     greenLabel->deactivate();
     blueLabel->deactivate();
 
-    // Numeric value boxes
+    // the rgb values display
     int valueY = labelY + labelRowH + 4;
     rValue = new TextBox(x + pad + 0*colW, valueY, colW, valueRowH, "0");
     gValue = new TextBox(x + pad + 1*colW, valueY, colW, valueRowH, "0");
@@ -145,7 +148,7 @@ ColorSelector::ColorSelector(int x, int y, int w, int h) : Group(x, y, w, h) {
     gValue->align(FL_ALIGN_CENTER | FL_ALIGN_INSIDE);
     bValue->align(FL_ALIGN_CENTER | FL_ALIGN_INSIDE);
 
-    // Wire callbacks
+    // callbacks
     redSlider->callback(&ColorSelector::sliderCb, this);
     greenSlider->callback(&ColorSelector::sliderCb, this);
     blueSlider->callback(&ColorSelector::sliderCb, this);

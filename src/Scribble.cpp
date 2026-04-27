@@ -13,8 +13,10 @@ void Scribble::draw(){
     }
 
     if (selected && !points.empty()) {
-        float minX = points[0]->getX(), maxX = minX;
-        float minY = points[0]->getY(), maxY = minY;
+        float minX = points[0]->getX();
+        float maxX = minX;
+        float minY = points[0]->getY();
+        float maxY = minY;
         for (unsigned int i = 1; i < points.size(); i++) {
             float px = points[i]->getX();
             float py = points[i]->getY();
@@ -26,10 +28,14 @@ void Scribble::draw(){
         glColor3f(0.0f, 0.0f, 0.0f);
         glLineWidth(2);
         glBegin(GL_LINES);
-            glVertex2f(minX, minY); glVertex2f(maxX, minY);
-            glVertex2f(maxX, minY); glVertex2f(maxX, maxY);
-            glVertex2f(maxX, maxY); glVertex2f(minX, maxY);
-            glVertex2f(minX, maxY); glVertex2f(minX, minY);
+            glVertex2f(minX, minY); 
+            glVertex2f(maxX, minY);
+            glVertex2f(maxX, minY); 
+            glVertex2f(maxX, maxY);
+            glVertex2f(maxX, maxY); 
+            glVertex2f(minX, maxY);
+            glVertex2f(minX, maxY); 
+            glVertex2f(minX, minY);
         glEnd();
     }
 }
@@ -52,8 +58,11 @@ void Scribble::translate(float dx, float dy) {
 }
 
 void Scribble::resize(float factor) {
-    if (points.empty()) return;
-    float cx = 0, cy = 0;
+    if (points.empty()){
+        return;
+    }
+    float cx = 0;
+    float cy = 0;
     for (unsigned int i = 0; i < points.size(); i++) {
         cx += points[i]->getX();
         cy += points[i]->getY();
