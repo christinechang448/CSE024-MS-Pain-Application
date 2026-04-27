@@ -79,12 +79,12 @@ Color ColorSelector::getColor() const {
 }
 
 ColorSelector::ColorSelector(int x, int y, int w, int h) : Group(x, y, w, h) {
-    int pad = 10;
-    int swatchH = 50;
-    int sliderRowH = 32;
-    int labelRowH = 30;
-    int valueRowH = 30;
-    int bumpW = 28;
+    int pad = 6;
+    int swatchH = 28;
+    int sliderRowH = 22;
+    int labelRowH = 20;
+    int valueRowH = 20;
+    int bumpW = 20;
 
     // the swatch thingy
     swatch = new Button(x + pad, y + pad, w - 2*pad, swatchH, "");
