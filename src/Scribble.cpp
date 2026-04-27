@@ -1,4 +1,4 @@
-#include "Scribble.h"
+#include <Scribble.h>
 #include <GL/freeglut.h>
 #include <GL/gl.h>
 #include <cmath>
