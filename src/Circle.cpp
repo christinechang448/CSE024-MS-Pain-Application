@@ -59,5 +59,7 @@ void Circle::resize(float factor) {
 }
 
 void Circle::setColor(float nr, float ng, float nb) {
-    r = nr; g = ng; b = nb;
+    r = nr; 
+    g = ng; 
+    b = nb;
 }
