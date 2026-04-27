@@ -18,7 +18,7 @@ class Toolbar : public bobcat::Group {
     bobcat::Image*  bringFrontButton;
     bobcat::Image*  sendBackButton;
     bobcat::Image*  undoButton;
-    bobcat::Button* redoButton;
+    bobcat::Image*  redoButton;
     bobcat::Image*  clearButton;
 
     TOOL tool;

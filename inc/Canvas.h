@@ -7,12 +7,17 @@
 #include "Scribble.h"
 
 class Canvas : public bobcat::Canvas_ {
+    enum OpType { ADD_OP, DELETE_OP };
+    struct Op { OpType type; Shape* shape; };
+
     std::vector<Shape*> shapes;
-    std::vector<Shape*> redoStack;
+    std::vector<Op> history;
+    std::vector<Op> redoStack;
     Shape* selected;
     Scribble* current;
 
     void clearRedo();
+    void eraseShape(Shape* s);
 
 public:
     Canvas(int x, int y, int w, int h);

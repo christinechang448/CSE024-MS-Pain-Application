@@ -4,6 +4,7 @@
 #include "Triangle.h"
 #include "Pentagon.h"
 #include "Hexagon.h"
+#include <set>
 
 Canvas::Canvas(int x, int y, int w, int h) : Canvas_(x, y, w, h) {
     current = nullptr;
@@ -11,13 +12,25 @@ Canvas::Canvas(int x, int y, int w, int h) : Canvas_(x, y, w, h) {
 }
 
 Canvas::~Canvas() {
+    std::set<Shape*> owned;
     for (unsigned int i = 0; i < shapes.size(); i++) {
-        delete shapes[i];
+        owned.insert(shapes[i]);
+    }
+    for (unsigned int i = 0; i < history.size(); i++) {
+        if (history[i].type == DELETE_OP) {
+            owned.insert(history[i].shape);
+        }
+    }
+    for (unsigned int i = 0; i < redoStack.size(); i++) {
+        if (redoStack[i].type == DELETE_OP) {
+            owned.insert(redoStack[i].shape);
+        }
+    }
+    for (std::set<Shape*>::iterator it = owned.begin(); it != owned.end(); ++it) {
+        delete *it;
     }
     shapes.clear();
-    for (unsigned int i = 0; i < redoStack.size(); i++) {
-        delete redoStack[i];
-    }
+    history.clear();
     redoStack.clear();
     if (current) {
         delete current;
@@ -25,49 +38,100 @@ Canvas::~Canvas() {
 }
 
 void Canvas::clearRedo() {
+    std::set<Shape*> live;
+    for (unsigned int i = 0; i < shapes.size(); i++) {
+        live.insert(shapes[i]);
+    }
+    for (unsigned int i = 0; i < history.size(); i++) {
+        if (history[i].type == DELETE_OP) {
+            live.insert(history[i].shape);
+        }
+    }
     for (unsigned int i = 0; i < redoStack.size(); i++) {
-        delete redoStack[i];
+        Op op = redoStack[i];
+        if (op.type == ADD_OP && live.find(op.shape) == live.end()) {
+            delete op.shape;
+        }
     }
     redoStack.clear();
 }
 
+void Canvas::eraseShape(Shape* s) {
+    for (unsigned int i = 0; i < shapes.size(); i++) {
+        if (shapes[i] == s) {
+            shapes.erase(shapes.begin() + i);
+            return;
+        }
+    }
+}
+
 void Canvas::addRectangle(float x, float y, float r, float g, float b) {
     deselect();
-    shapes.push_back(new Rectangle(x, y, r, g, b));
+    Shape* s = new Rectangle(x, y, r, g, b);
+    shapes.push_back(s);
+    Op op = { ADD_OP, s };
+    history.push_back(op);
     clearRedo();
 }
 
 void Canvas::addCircle(float x, float y, float r, float g, float b) {
     deselect();
-    shapes.push_back(new Circle(x, y, r, g, b));
+    Shape* s = new Circle(x, y, r, g, b);
+    shapes.push_back(s);
+    Op op = { ADD_OP, s };
+    history.push_back(op);
     clearRedo();
 }
 
 void Canvas::addTriangle(float x, float y, float base, float height, float r, float g, float b) {
     deselect();
-    shapes.push_back(new Triangle(x, y, base, height, r, g, b));
+    Shape* s = new Triangle(x, y, base, height, r, g, b);
+    shapes.push_back(s);
+    Op op = { ADD_OP, s };
+    history.push_back(op);
     clearRedo();
 }
 
 void Canvas::addPentagon(float x, float y, float length, float r, float g, float b) {
     deselect();
-    shapes.push_back(new Pentagon(x, y, length, r, g, b));
+    Shape* s = new Pentagon(x, y, length, r, g, b);
+    shapes.push_back(s);
+    Op op = { ADD_OP, s };
+    history.push_back(op);
     clearRedo();
 }
 
 void Canvas::addHexagon(float x, float y, float length, float r, float g, float b) {
     deselect();
-    shapes.push_back(new Hexagon(x, y, length, r, g, b));
+    Shape* s = new Hexagon(x, y, length, r, g, b);
+    shapes.push_back(s);
+    Op op = { ADD_OP, s };
+    history.push_back(op);
     clearRedo();
 }
 
 void Canvas::clear() {
     deselect();
+    std::set<Shape*> owned;
     for (unsigned int i = 0; i < shapes.size(); i++) {
-        delete shapes[i];
+        owned.insert(shapes[i]);
+    }
+    for (unsigned int i = 0; i < history.size(); i++) {
+        if (history[i].type == DELETE_OP) {
+            owned.insert(history[i].shape);
+        }
+    }
+    for (unsigned int i = 0; i < redoStack.size(); i++) {
+        if (redoStack[i].type == DELETE_OP) {
+            owned.insert(redoStack[i].shape);
+        }
+    }
+    for (std::set<Shape*>::iterator it = owned.begin(); it != owned.end(); ++it) {
+        delete *it;
     }
     shapes.clear();
-    clearRedo();
+    history.clear();
+    redoStack.clear();
     if (current) {
         delete current;
         current = nullptr;
@@ -75,23 +139,42 @@ void Canvas::clear() {
 }
 
 void Canvas::undo() {
-    if (shapes.size() > 0) {
-        Shape* s = shapes.back();
-        shapes.pop_back();
-        if (s == selected) {
+    if (history.empty()) {
+        return;
+    }
+    Op op = history.back();
+    history.pop_back();
+    if (op.type == ADD_OP) {
+        if (op.shape == selected) {
             selected = nullptr;
         }
-        s->setSelected(false);
-        redoStack.push_back(s);
+        op.shape->setSelected(false);
+        eraseShape(op.shape);
     }
+    else {
+        shapes.push_back(op.shape);
+    }
+    redoStack.push_back(op);
 }
 
 void Canvas::redo() {
-    if (redoStack.size() > 0) {
-        Shape* s = redoStack.back();
-        redoStack.pop_back();
-        shapes.push_back(s);
+    if (redoStack.empty()) {
+        return;
     }
+    Op op = redoStack.back();
+    redoStack.pop_back();
+    if (op.type == ADD_OP) {
+        op.shape->setSelected(false);
+        shapes.push_back(op.shape);
+    }
+    else {
+        if (op.shape == selected) {
+            selected = nullptr;
+        }
+        op.shape->setSelected(false);
+        eraseShape(op.shape);
+    }
+    history.push_back(op);
 }
 
 void Canvas::startScribble() {
@@ -111,6 +194,8 @@ void Canvas::updateScribble(float x, float y, float r, float g, float b, int siz
 void Canvas::endScribble() {
     if (current) {
         shapes.push_back(current);
+        Op op = { ADD_OP, current };
+        history.push_back(op);
         current = nullptr;
         clearRedo();
     }
@@ -149,31 +234,33 @@ void Canvas::deleteSelected() {
     if (!selected) {
         return;
     }
-    for (unsigned int i = 0; i < shapes.size(); i++) {
-        if (shapes[i] == selected) {
-            shapes.erase(shapes.begin() + i);
-            break;
-        }
-    }
-    delete selected;
+    Shape* s = selected;
+    eraseShape(s);
+    s->setSelected(false);
     selected = nullptr;
+    Op op = { DELETE_OP, s };
+    history.push_back(op);
+    clearRedo();
 }
 
 void Canvas::moveSelected(float dx, float dy) {
     if (selected) {
         selected->translate(dx, dy);
+        clearRedo();
     }
 }
 
 void Canvas::resizeSelected(float factor) {
     if (selected) {
         selected->resize(factor);
+        clearRedo();
     }
 }
 
 void Canvas::recolorSelected(float r, float g, float b) {
     if (selected) {
         selected->setColor(r, g, b);
+        clearRedo();
     }
 }
 
@@ -188,6 +275,7 @@ void Canvas::bringToFront() {
             break;
         }
     }
+    clearRedo();
 }
 
 void Canvas::sendToBack() {
@@ -201,6 +289,7 @@ void Canvas::sendToBack() {
             break;
         }
     }
+    clearRedo();
 }
 
 void Canvas::render() {

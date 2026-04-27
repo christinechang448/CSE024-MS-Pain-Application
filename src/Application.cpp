@@ -111,7 +111,6 @@ Application::Application() {
     dragging = false;
 
     int toolbarW = 50;
-    int toolbarH = 750;
     int canvasW = 600;
     int canvasH = 450;
     int colorH = 300;
@@ -119,15 +118,15 @@ Application::Application() {
     int winW = toolbarW + canvasW;
     int winH = canvasH + colorH;
 
-    window = new Window(25, 75, winW, winH, "Paint App");
+    window = new Window(25, 75, winW, winH, "CSE 024 MS Paint Application");
 
-    toolbar = new Toolbar(0, 0, toolbarW, toolbarH);
     canvas = new Canvas(toolbarW, 0, canvasW, canvasH);
+    toolbar = new Toolbar(0, 0, toolbarW, winH);
     colorSelector = new ColorSelector(toolbarW, canvasH, canvasW, colorH);
     colorSelector->box(FL_BORDER_BOX);
 
-    window->add(toolbar);
     window->add(canvas);
+    window->add(toolbar);
     window->add(colorSelector);
 
     ON_MOUSE_DOWN(canvas, Application::onCanvasMouseDown);
