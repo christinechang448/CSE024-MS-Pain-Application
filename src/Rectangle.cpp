@@ -1,4 +1,4 @@
-#include "Rectangle.h"
+#include <Rectangle.h>
 #include <GL/freeglut.h>
 
 Rectangle::Rectangle() {

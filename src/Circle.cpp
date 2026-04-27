@@ -1,4 +1,4 @@
-#include "Circle.h"
+#include <Circle.h>
 #include <GL/freeglut.h>
 #include <GL/gl.h>
 
@@ -27,7 +27,7 @@ void Circle::draw() {
 
     glBegin(GL_POINTS);
         glVertex2f(x, y);
-    glEnd();
+    glEnd(); 
 
     if (selected) {
         float rr = size * 0.005f + 0.01f;

@@ -1,4 +1,4 @@
-#include "Triangle.h"
+#include <Triangle.h>
 #include <GL/freeglut.h>
 
 Triangle::Triangle() {
