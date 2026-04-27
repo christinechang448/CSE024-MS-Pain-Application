@@ -139,7 +139,7 @@ Shape* Canvas::getSelected() const {
 
 void Canvas::deleteSelected() {
     if (!selected) return;
-    for (int i = 0; i < shapes.size(); i++) {
+    for (unsigned int i = 0; i < shapes.size(); i++) {
         if (shapes[i] == selected) {
             shapes.erase(shapes.begin() + i);
             break;
@@ -169,7 +169,7 @@ void Canvas::recolorSelected(float r, float g, float b) {
 
 void Canvas::bringToFront() {
     if (!selected) return;
-    for (int i = 0; i < shapes.size(); i++) {
+    for (unsigned int i = 0; i < shapes.size(); i++) {
         if (shapes[i] == selected) {
             shapes.erase(shapes.begin() + i);
             shapes.push_back(selected);
@@ -180,7 +180,7 @@ void Canvas::bringToFront() {
 
 void Canvas::sendToBack() {
     if (!selected) return;
-    for (int i = 0; i < shapes.size(); i++) {
+    for (unsigned int i = 0; i < shapes.size(); i++) {
         if (shapes[i] == selected) {
             shapes.erase(shapes.begin() + i);
             shapes.insert(shapes.begin(), selected);

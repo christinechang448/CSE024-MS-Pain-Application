@@ -6,7 +6,7 @@
 class Circle : public Shape {
     float x;
     float y;
-    float radius;
+    float size;
     float r;
     float g;
     float b;
