@@ -110,10 +110,10 @@ Application::Application() {
     lastMy = 0;
     dragging = false;
 
-    int toolbarW = 50;
+    int toolbarW = 100;
     int canvasW = 600;
-    int canvasH = 450;
-    int colorH = 300;
+    int canvasH = 400;
+    int colorH = 260;
 
     int winW = toolbarW + canvasW;
     int winH = canvasH + colorH;

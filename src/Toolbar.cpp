@@ -108,22 +108,24 @@ ACTION Toolbar::getAction() const {
 
 Toolbar::Toolbar(int x, int y, int w, int h) : Group(x, y, w, h) {
     int s = 50;
-    int row = 0;
-    pencilButton = new Image(x, y + s*(row++), s, s, "./assets/pencil.png");
-    eraserButton = new Image(x, y + s*(row++), s, s, "./assets/eraser.png");
-    selectorButton = new Image(x, y + s*(row++), s, s, "./assets/mouse.png");
-    circleButton = new Image(x, y + s*(row++), s, s, "./assets/circle.png");
-    triangleButton = new Image(x, y + s*(row++), s, s, "./assets/triangle.png");
-    rectangleButton = new Image(x, y + s*(row++), s, s, "./assets/rectangle.png");
-    pentagonButton = new Image(x, y + s*(row++), s, s, "./assets/pentagon.png");
-    hexagonButton = new Image(x, y + s*(row++), s, s, "./assets/hexagon.png");
-    enlargeButton = new Image(x, y + s*(row++), s, s, "./assets/plus.png");
-    shrinkButton = new Image(x, y + s*(row++), s, s, "./assets/minus.png");
-    bringFrontButton = new Image(x, y + s*(row++), s, s, "./assets/bring to front.png");
-    sendBackButton = new Image(x, y + s*(row++), s, s, "./assets/sent to back.png");
-    undoButton = new Image(x, y + s*(row++), s, s, "./assets/undo.png");
-    redoButton = new Image(x, y + s*(row++), s, s, "./assets/redo.png");
-    clearButton = new Image(x, y + s*(row++), s, s, "./assets/clear.png");
+    int idx = 0;
+    auto pos = [&](int& col, int& r) { col = idx % 2; r = idx / 2; idx++; };
+    int col, r;
+    pos(col, r); pencilButton    = new Image(x + s*col, y + s*r, s, s, "./assets/pencil.png");
+    pos(col, r); eraserButton    = new Image(x + s*col, y + s*r, s, s, "./assets/eraser.png");
+    pos(col, r); selectorButton  = new Image(x + s*col, y + s*r, s, s, "./assets/mouse.png");
+    pos(col, r); circleButton    = new Image(x + s*col, y + s*r, s, s, "./assets/circle.png");
+    pos(col, r); triangleButton  = new Image(x + s*col, y + s*r, s, s, "./assets/triangle.png");
+    pos(col, r); rectangleButton = new Image(x + s*col, y + s*r, s, s, "./assets/rectangle.png");
+    pos(col, r); pentagonButton  = new Image(x + s*col, y + s*r, s, s, "./assets/pentagon.png");
+    pos(col, r); hexagonButton   = new Image(x + s*col, y + s*r, s, s, "./assets/hexagon.png");
+    pos(col, r); enlargeButton   = new Image(x + s*col, y + s*r, s, s, "./assets/plus.png");
+    pos(col, r); shrinkButton    = new Image(x + s*col, y + s*r, s, s, "./assets/minus.png");
+    pos(col, r); bringFrontButton= new Image(x + s*col, y + s*r, s, s, "./assets/bring to front.png");
+    pos(col, r); sendBackButton  = new Image(x + s*col, y + s*r, s, s, "./assets/sent to back.png");
+    pos(col, r); undoButton      = new Image(x + s*col, y + s*r, s, s, "./assets/undo.png");
+    pos(col, r); redoButton      = new Image(x + s*col, y + s*r, s, s, "./assets/redo.png");
+    pos(col, r); clearButton     = new Image(x + s*col, y + s*r, s, s, "./assets/clear.png");
 
     tool = PENCIL;
     action = NONE;
