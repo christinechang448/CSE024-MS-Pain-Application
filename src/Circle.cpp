@@ -35,14 +35,14 @@ void Circle::draw() {
         glColor3f(0.0f, 0.0f, 0.0f);
         glLineWidth(2);
         glBegin(GL_LINES);
-            glVertex2f(x - rx, y - ry);
-            glVertex2f(x + rx, y - ry);
-            glVertex2f(x + rx, y - ry);
-            glVertex2f(x + rx, y + ry);
-            glVertex2f(x + rx, y + ry);
-            glVertex2f(x - rx, y + ry);
-            glVertex2f(x - rx, y + ry);
-            glVertex2f(x - rx, y - ry);
+            glVertex2f(x - radius, y - radius);
+            glVertex2f(x + radius, y - radius);
+            glVertex2f(x + radius, y - radius);
+            glVertex2f(x + radius, y + radius);
+            glVertex2f(x + radius, y + radius);
+            glVertex2f(x - radius, y + radius);
+            glVertex2f(x - radius, y + radius);
+            glVertex2f(x - radius, y - radius);
         glEnd();
     }
 }
