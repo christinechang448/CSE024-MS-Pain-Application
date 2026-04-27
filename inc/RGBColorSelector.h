@@ -1,9 +1,9 @@
-#ifndef RGBCOLOR_SELECTOR_H
-#define RGBCOLOR_SELECTOR_H
+#ifndef COLOR_SELECTOR_H
+#define COLOR_SELECTOR_H
 
 #include <bobcat_ui/all.h>
 #include <FL/Fl_Value_Slider.H>
-#include "Color.h"
+#include <Color.h>
 
 class ColorSelector : public bobcat::Group {
     bobcat::Button*  swatch;
@@ -31,7 +31,6 @@ class ColorSelector : public bobcat::Group {
     void onSliderChange();
     void onBumpClick(bobcat::Widget* sender);
     void refresh();
-    int clamp255(int v);
 
 public:
     ColorSelector(int x, int y, int w, int h);

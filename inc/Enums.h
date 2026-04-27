@@ -9,7 +9,7 @@ enum TOOL {
 enum ACTION {
     NONE, UNDO, REDO, CLEAR,
     BRING_FRONT, SEND_BACK,
-    GROW, SHRINK
+    ENLARGE, SHRINK
 };
 
 #endif

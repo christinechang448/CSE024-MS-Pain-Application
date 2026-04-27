@@ -5,16 +5,6 @@
 
 using namespace bobcat;
 
-int ColorSelector::clamp255(int v) {
-    if (v < 0){
-        return 0;
-    }
-    if (v > 255){
-        return 255;
-    }
-    return v;
-}
-
 void ColorSelector::sliderCb(Fl_Widget*, void* self) {
     static_cast<ColorSelector*>(self)->onSliderChange();
 }
@@ -25,20 +15,32 @@ void ColorSelector::onSliderChange() {
 }
 
 void ColorSelector::onBumpClick(bobcat::Widget* sender) {
-    if      (sender == rDec) redSlider->value(clamp255((int)redSlider->value() - 1));
-    else if (sender == rInc) redSlider->value(clamp255((int)redSlider->value() + 1));
-    else if (sender == gDec) greenSlider->value(clamp255((int)greenSlider->value() - 1));
-    else if (sender == gInc) greenSlider->value(clamp255((int)greenSlider->value() + 1));
-    else if (sender == bDec) blueSlider->value(clamp255((int)blueSlider->value() - 1));
-    else if (sender == bInc) blueSlider->value(clamp255((int)blueSlider->value() + 1));
+    if (sender == rDec) {
+        redSlider->value(clamp255((int)redSlider->value() - 1));
+    }
+    else if (sender == rInc) {
+        redSlider->value(clamp255((int)redSlider->value() + 1));
+    }
+    else if (sender == gDec){
+        greenSlider->value(clamp255((int)greenSlider->value() - 1));
+    }
+    else if (sender == gInc){
+        greenSlider->value(clamp255((int)greenSlider->value() + 1));
+    }
+    else if (sender == bDec){
+        blueSlider->value(clamp255((int)blueSlider->value() - 1));
+    }
+    else if (sender == bInc){
+        blueSlider->value(clamp255((int)blueSlider->value() + 1));
+    }
     refresh();
     if (onChangeCb) onChangeCb(this);
 }
 
 void ColorSelector::refresh() {
-    int r = clamp255((int)redSlider->value());
-    int g = clamp255((int)greenSlider->value());
-    int b = clamp255((int)blueSlider->value());
+    int r = (int)redSlider->value();
+    int g = (int)greenSlider->value();
+    int b = (int)blueSlider->value();
 
     swatch->color(fl_rgb_color(r, g, b));
     swatch->redraw();
@@ -63,9 +65,6 @@ Color ColorSelector::getColor() const {
     int r = (int)redSlider->value();
     int g = (int)greenSlider->value();
     int b = (int)blueSlider->value();
-    if (r < 0) r = 0; if (r > 255) r = 255;
-    if (g < 0) g = 0; if (g > 255) g = 255;
-    if (b < 0) b = 0; if (b > 255) b = 255;
     return Color(r / 255.0f, g / 255.0f, b / 255.0f);
 }
 
