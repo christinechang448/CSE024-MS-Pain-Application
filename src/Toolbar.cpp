@@ -68,7 +68,7 @@ void Toolbar::onClick(bobcat::Widget* sender) {
     else if (sender == hexagonButton){
         tool = HEXAGON;
     }
-    else if (sender == englargeButton){
+    else if (sender == enlargeButton){
         action = ENLARGE;
     }
     else if (sender == shrinkButton){
@@ -117,7 +117,7 @@ Toolbar::Toolbar(int x, int y, int w, int h) : Group(x, y, w, h) {
     rectangleButton = new Image(x, y + s*(row++), s, s, "./assets/rectangle.png");
     pentagonButton = new Image(x, y + s*(row++), s, s, "./assets/pentagon.png");
     hexagonButton = new Image(x, y + s*(row++), s, s, "./assets/hexagon.png");
-    englargeButton = new Image(x, y + s*(row++), s, s, "./assets/plus.png");
+    enlargeButton = new Image(x, y + s*(row++), s, s, "./assets/plus.png");
     shrinkButton = new Image(x, y + s*(row++), s, s, "./assets/minus.png");
     bringFrontButton = new Image(x, y + s*(row++), s, s, "./assets/bring-to-front.png");
     sendBackButton = new Image(x, y + s*(row++), s, s, "./assets/send-to-back.png");
@@ -136,7 +136,7 @@ Toolbar::Toolbar(int x, int y, int w, int h) : Group(x, y, w, h) {
     rectangleButton->box(FL_BORDER_BOX);
     pentagonButton->box(FL_BORDER_BOX);
     hexagonButton->box(FL_BORDER_BOX);
-    englargeButton->box(FL_BORDER_BOX);
+    enlargeButton->box(FL_BORDER_BOX);
     shrinkButton->box(FL_BORDER_BOX);
     bringFrontButton->box(FL_BORDER_BOX);
     sendBackButton->box(FL_BORDER_BOX);
@@ -154,7 +154,7 @@ Toolbar::Toolbar(int x, int y, int w, int h) : Group(x, y, w, h) {
     ON_CLICK(rectangleButton, Toolbar::onClick);
     ON_CLICK(pentagonButton, Toolbar::onClick);
     ON_CLICK(hexagonButton, Toolbar::onClick);
-    ON_CLICK(englargeButton, Toolbar::onClick);
+    ON_CLICK(enlargeButton, Toolbar::onClick);
     ON_CLICK(shrinkButton, Toolbar::onClick);
     ON_CLICK(bringFrontButton, Toolbar::onClick);
     ON_CLICK(sendBackButton, Toolbar::onClick);
