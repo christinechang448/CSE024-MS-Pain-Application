@@ -37,34 +37,6 @@ void Point::draw() {
     glBegin(GL_POINTS);
         glVertex2f(x, y);
     glEnd();
-
-    if (selected) {
-        float rr = size * 0.1f;
-        glColor3f(0.0f, 0.0f, 0.0f);
-        glLineWidth(2);
-        glBegin(GL_LINES);
-            glVertex2f(x - rr, y - rr); glVertex2f(x + rr, y - rr);
-            glVertex2f(x + rr, y - rr); glVertex2f(x + rr, y + rr);
-            glVertex2f(x + rr, y + rr); glVertex2f(x - rr, y + rr);
-            glVertex2f(x - rr, y + rr); glVertex2f(x - rr, y - rr);
-        glEnd();
-    }
-}
-
-bool Point::contains(float px, float py) {
-    float rr = size * 0.1f;
-    float dx = px - x;
-    float dy = py - y;
-    return dx*dx + dy*dy <= rr*rr;
-}
-
-void Point::translate(float dx, float dy) {
-    x += dx;
-    y += dy;
-}
-
-void Point::resize(float factor) {
-    size *= factor;
 }
 
 void Point::setColor(float nr, float ng, float nb) {
