@@ -11,7 +11,8 @@ class Application : public bobcat::Application_ {
     Canvas* canvas;
     Toolbar* toolbar;
     ColorSelector* colorSelector;
-    float lastMx, lastMy;
+    float lastMx;
+    float lastMy;
     bool dragging;
 
     void onCanvasMouseDown(bobcat::Widget* sender, float mx, float my);

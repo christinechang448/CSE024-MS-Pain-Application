@@ -119,9 +119,9 @@ Toolbar::Toolbar(int x, int y, int w, int h) : Group(x, y, w, h) {
     hexagonButton = new Image(x, y + s*(row++), s, s, "./assets/hexagon.png");
     enlargeButton = new Image(x, y + s*(row++), s, s, "./assets/plus.png");
     shrinkButton = new Image(x, y + s*(row++), s, s, "./assets/minus.png");
-    bringFrontButton = new Image(x, y + s*(row++), s, s, "./assets/bring-to-front.png");
-    sendBackButton = new Image(x, y + s*(row++), s, s, "./assets/send-to-back.png");
-    undoButton = new Button(x, y + s*(row++), s, s, "./assets/undo.png");
+    bringFrontButton = new Image(x, y + s*(row++), s, s, "./assets/bring to front.png");
+    sendBackButton = new Image(x, y + s*(row++), s, s, "./assets/sent to back.png");
+    undoButton = new Image(x, y + s*(row++), s, s, "./assets/undo.png");
     redoButton = new Button(x, y + s*(row++), s, s, "redo");
     clearButton = new Image(x, y + s*(row++), s, s, "./assets/clear.png");
 

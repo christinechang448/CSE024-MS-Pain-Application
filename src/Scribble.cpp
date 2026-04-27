@@ -1,7 +1,6 @@
 #include <Scribble.h>
 #include <GL/freeglut.h>
 #include <GL/gl.h>
-#include <cmath>
 
 void Scribble::addPoint(float x, float y, float r, float g, float b, int size) {
     points.push_back(new Point(x, y, r, g, b, size));
@@ -20,10 +19,18 @@ void Scribble::draw(){
         for (unsigned int i = 1; i < points.size(); i++) {
             float px = points[i]->getX();
             float py = points[i]->getY();
-            if (px < minX) minX = px;
-            if (px > maxX) maxX = px;
-            if (py < minY) minY = py;
-            if (py > maxY) maxY = py;
+            if (px < minX) {
+                minX = px;
+            }
+            if (px > maxX) {
+                maxX = px;
+            }
+            if (py < minY) {
+                minY = py;
+            }
+            if (py > maxY) {
+                maxY = py;
+            }
         }
         glColor3f(0.0f, 0.0f, 0.0f);
         glLineWidth(2);
@@ -45,7 +52,9 @@ bool Scribble::contains(float x, float y) {
     for (unsigned int i = 0; i < points.size(); i++) {
         float dx = points[i]->getX() - x;
         float dy = points[i]->getY() - y;
-        if (dx*dx + dy*dy <= tol*tol) return true;
+        if (dx*dx + dy*dy <= tol*tol) {
+            return true;
+        }
     }
     return false;
 }

@@ -16,7 +16,9 @@ void ColorSelector::sliderCb(Fl_Widget*, void* self) {
 
 void ColorSelector::onSliderChange() {
     refresh();
-    if (onChangeCb) onChangeCb(this);
+    if (onChangeCb) {
+        onChangeCb(this);
+    }
 }
 
 void ColorSelector::onBumpClick(bobcat::Widget* sender) {
@@ -39,7 +41,9 @@ void ColorSelector::onBumpClick(bobcat::Widget* sender) {
         blueSlider->value(clamp255((int)blueSlider->value() + 1));
     }
     refresh();
-    if (onChangeCb) onChangeCb(this);
+    if (onChangeCb) {
+        onChangeCb(this);
+    }
 }
 
 void ColorSelector::refresh() {
@@ -67,10 +71,11 @@ void ColorSelector::refresh() {
 }
 
 Color ColorSelector::getColor() const {
-    int r = (int)redSlider->value();
-    int g = (int)greenSlider->value();
-    int b = (int)blueSlider->value();
-    return Color(r / 255.0f, g / 255.0f, b / 255.0f);
+    return Color(
+        redSlider->value() / 255.0f,
+        greenSlider->value() / 255.0f,
+        blueSlider->value() / 255.0f
+    );
 }
 
 ColorSelector::ColorSelector(int x, int y, int w, int h) : Group(x, y, w, h) {

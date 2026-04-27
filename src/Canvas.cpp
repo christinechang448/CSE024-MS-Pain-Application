@@ -1,4 +1,9 @@
 #include <Canvas.h>
+#include "Rectangle.h"
+#include "Circle.h"
+#include "Triangle.h"
+#include "Pentagon.h"
+#include "Hexagon.h"
 
 Canvas::Canvas(int x, int y, int w, int h) : Canvas_(x, y, w, h) {
     current = nullptr;
@@ -91,6 +96,9 @@ void Canvas::redo() {
 
 void Canvas::startScribble() {
     deselect();
+    if (current) {
+        delete current;
+    }
     current = new Scribble();
 }
 
@@ -138,7 +146,9 @@ Shape* Canvas::getSelected() const {
 }
 
 void Canvas::deleteSelected() {
-    if (!selected) return;
+    if (!selected) {
+        return;
+    }
     for (unsigned int i = 0; i < shapes.size(); i++) {
         if (shapes[i] == selected) {
             shapes.erase(shapes.begin() + i);
@@ -168,7 +178,9 @@ void Canvas::recolorSelected(float r, float g, float b) {
 }
 
 void Canvas::bringToFront() {
-    if (!selected) return;
+    if (!selected) {
+        return;
+    }
     for (unsigned int i = 0; i < shapes.size(); i++) {
         if (shapes[i] == selected) {
             shapes.erase(shapes.begin() + i);
@@ -179,7 +191,9 @@ void Canvas::bringToFront() {
 }
 
 void Canvas::sendToBack() {
-    if (!selected) return;
+    if (!selected) {
+        return;
+    }
     for (unsigned int i = 0; i < shapes.size(); i++) {
         if (shapes[i] == selected) {
             shapes.erase(shapes.begin() + i);

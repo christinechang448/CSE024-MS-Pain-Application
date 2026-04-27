@@ -3,11 +3,6 @@
 
 #include <bobcat_ui/canvas.h>
 #include <vector>
-#include "Rectangle.h"
-#include "Circle.h"
-#include "Triangle.h"
-#include "Pentagon.h"
-#include "Hexagon.h"
 #include "Shape.h"
 #include "Scribble.h"
 
@@ -16,6 +11,8 @@ class Canvas : public bobcat::Canvas_ {
     std::vector<Shape*> redoStack;
     Shape* selected;
     Scribble* current;
+
+    void clearRedo();
 
 public:
     Canvas(int x, int y, int w, int h);
@@ -45,7 +42,6 @@ public:
     void sendToBack();
 
     void render();
-    void clearRedo();
 
     ~Canvas();
 };

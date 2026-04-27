@@ -11,6 +11,15 @@ Point::Point() {
     b = 0.0;
 }
 
+Point::Point(float x, float y) {
+    this->x = x;
+    this->y = y;
+    size = 7.0f;
+    r = 0.0;
+    g = 0.0;
+    b = 0.0;
+}
+
 Point::Point(float x, float y, float r, float g, float b) {
     this->x = x;
     this->y = y;
@@ -39,8 +48,40 @@ void Point::draw() {
     glEnd();
 }
 
-void Point::setColor(float nr, float ng, float nb) {
-    r = nr;
-    g = ng;
-    b = nb;
+float Point::getX() const {
+    return x;
+}
+
+float Point::getY() const {
+    return y;
+}
+
+float Point::getR() const {
+    return r;
+}
+
+float Point::getG() const {
+    return g;
+}
+
+float Point::getB() const {
+    return b;
+}
+
+int Point::getSize() const {
+    return size;
+}
+
+void Point::setX(float x) {
+    this->x = x;
+}
+
+void Point::setY(float y) {
+    this->y = y;
+}
+
+void Point::setColor(float newRed, float newGreen, float newBlue) {
+    r = newRed;
+    g = newGreen;
+    b = newBlue;
 }

@@ -45,9 +45,21 @@ void Pentagon::draw() {
 }
 
 bool Pentagon::contains(float px, float py) {
-    float dx = px - x;
-    float dy = py - y;
-    return dx*dx + dy*dy <= length*length;
+    bool inside = false;
+    int n = 5;
+    for (int i = 0, j = n - 1; i < n; j = i++) {
+        float ai = 2.0f * M_PI * i / 5.0f + M_PI / 2.0f;
+        float aj = 2.0f * M_PI * j / 5.0f + M_PI / 2.0f;
+        float xi = x + length * cos(ai);
+        float yi = y + length * sin(ai);
+        float xj = x + length * cos(aj);
+        float yj = y + length * sin(aj);
+        if (((yi > py) != (yj > py)) &&
+            (px < (xj - xi) * (py - yi) / (yj - yi) + xi)) {
+            inside = !inside;
+        }
+    }
+    return inside;
 }
 
 void Pentagon::translate(float dx, float dy) {
@@ -59,8 +71,8 @@ void Pentagon::resize(float factor) {
     length *= factor;
 }
 
-void Pentagon::setColor(float nr, float ng, float nb) {
-    r = nr;
-    g = ng;
-    b = nb;
+void Pentagon::setColor(float newRed, float newGreen, float newBlue) {
+    r = newRed;
+    g = newGreen;
+    b = newBlue;
 }

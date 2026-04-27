@@ -6,7 +6,7 @@
 class Circle : public Shape {
     float x;
     float y;
-    float size;
+    float radius;
     float r;
     float g;
     float b;
@@ -19,7 +19,7 @@ public:
     bool contains(float px, float py);
     void translate(float dx, float dy);
     void resize(float factor);
-    void setColor(float nr, float ng, float nb);
+    void setColor(float newRed, float newGreen, float newBlue);
 };
 
 #endif

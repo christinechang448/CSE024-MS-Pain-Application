@@ -20,7 +20,7 @@ public:
     bool contains(float px, float py);
     void translate(float dx, float dy);
     void resize(float factor);
-    void setColor(float nr, float ng, float nb);
+    void setColor(float newRed, float newGreen, float newBlue);
 };
 
 #endif

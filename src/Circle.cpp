@@ -1,11 +1,12 @@
 #include <Circle.h>
 #include <GL/freeglut.h>
 #include <GL/gl.h>
+#include <cmath>
 
 Circle::Circle() {
     x = 0.0;
     y = 0.0;
-    size = 60.0f;
+    radius = 0.15f;
     r = 0.0;
     g = 0.0;
     b = 0.0;
@@ -14,39 +15,43 @@ Circle::Circle() {
 Circle::Circle(float x, float y, float r, float g, float b) {
     this->x = x;
     this->y = y;
-    size = 60.0f;
+    radius = 0.15f;
     this->r = r;
     this->g = g;
     this->b = b;
 }
 
 void Circle::draw() {
-    glEnable(GL_POINT_SMOOTH);
     glColor3f(r, g, b);
-    glPointSize(size);
 
-    glBegin(GL_POINTS);
+    glBegin(GL_TRIANGLE_FAN);
         glVertex2f(x, y);
-    glEnd(); 
+        for (int i = 0; i <= 36; i++) {
+            float angle = 2.0f * M_PI * i / 36.0f;
+            glVertex2f(x + radius * cos(angle), y + radius * sin(angle));
+        }
+    glEnd();
 
     if (selected) {
-        float rr = size * 0.005f + 0.01f;
         glColor3f(0.0f, 0.0f, 0.0f);
         glLineWidth(2);
         glBegin(GL_LINES);
-            glVertex2f(x - rr, y - rr); glVertex2f(x + rr, y - rr);
-            glVertex2f(x + rr, y - rr); glVertex2f(x + rr, y + rr);
-            glVertex2f(x + rr, y + rr); glVertex2f(x - rr, y + rr);
-            glVertex2f(x - rr, y + rr); glVertex2f(x - rr, y - rr);
+            glVertex2f(x - radius, y - radius);
+            glVertex2f(x + radius, y - radius);
+            glVertex2f(x + radius, y - radius);
+            glVertex2f(x + radius, y + radius);
+            glVertex2f(x + radius, y + radius);
+            glVertex2f(x - radius, y + radius);
+            glVertex2f(x - radius, y + radius);
+            glVertex2f(x - radius, y - radius);
         glEnd();
     }
 }
 
 bool Circle::contains(float px, float py) {
-    float rr = size * 0.005f;
     float dx = px - x;
     float dy = py - y;
-    return dx*dx + dy*dy <= rr*rr;
+    return dx*dx + dy*dy <= radius*radius;
 }
 
 void Circle::translate(float dx, float dy) {
@@ -55,11 +60,11 @@ void Circle::translate(float dx, float dy) {
 }
 
 void Circle::resize(float factor) {
-    size *= factor;
+    radius *= factor;
 }
 
-void Circle::setColor(float nr, float ng, float nb) {
-    r = nr; 
-    g = ng; 
-    b = nb;
+void Circle::setColor(float newRed, float newGreen, float newBlue) {
+    r = newRed;
+    g = newGreen;
+    b = newBlue;
 }

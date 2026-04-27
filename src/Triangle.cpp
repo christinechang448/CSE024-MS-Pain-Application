@@ -47,15 +47,21 @@ void Triangle::draw() {
 }
 
 bool Triangle::contains(float px, float py) {
-    float dx = px - x;
-    float dy = py - y;
-    if (dx < 0){
-        dx = -dx;
-    }
-    if (dy < 0) {
-        dy = -dy;
-    }
-    return dx <= base/2 && dy <= height/2;
+    float v0x = x - base/2;
+    float v0y = y - height/2;
+    float v1x = x;
+    float v1y = y + height/2;
+    float v2x = x + base/2;
+    float v2y = y - height/2;
+
+    float d1 = (px - v1x) * (v0y - v1y) - (v0x - v1x) * (py - v1y);
+    float d2 = (px - v2x) * (v1y - v2y) - (v1x - v2x) * (py - v2y);
+    float d3 = (px - v0x) * (v2y - v0y) - (v2x - v0x) * (py - v0y);
+
+    bool hasNeg = (d1 < 0) || (d2 < 0) || (d3 < 0);
+    bool hasPos = (d1 > 0) || (d2 > 0) || (d3 > 0);
+
+    return !(hasNeg && hasPos);
 }
 
 void Triangle::translate(float dx, float dy) {
@@ -68,8 +74,8 @@ void Triangle::resize(float factor) {
     height *= factor;
 }
 
-void Triangle::setColor(float nr, float ng, float nb) {
-    r = nr; 
-    g = ng; 
-    b = nb;
+void Triangle::setColor(float newRed, float newGreen, float newBlue) {
+    r = newRed;
+    g = newGreen;
+    b = newBlue;
 }

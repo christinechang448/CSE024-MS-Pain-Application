@@ -50,8 +50,12 @@ void Rectangle::draw() {
 bool Rectangle::contains(float px, float py) {
     float dx = px - x;
     float dy = py - y;
-    if (dx < 0) dx = -dx;
-    if (dy < 0) dy = -dy;
+    if (dx < 0) {
+        dx = -dx;
+    }
+    if (dy < 0) {
+        dy = -dy;
+    }
     return dx <= width/2 && dy <= height/2;
 }
 
@@ -65,8 +69,8 @@ void Rectangle::resize(float factor) {
     height *= factor;
 }
 
-void Rectangle::setColor(float nr, float ng, float nb) {
-    r = nr; 
-    g = ng; 
-    b = nb;
+void Rectangle::setColor(float newRed, float newGreen, float newBlue) {
+    r = newRed;
+    g = newGreen;
+    b = newBlue;
 }
