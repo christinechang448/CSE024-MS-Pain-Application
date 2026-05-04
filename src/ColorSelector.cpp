@@ -92,7 +92,7 @@ Color PresetColorSelector::getColor() const {
     }
 }
 
-PresetColorSelector::ColorSelector(int x, int y, int w, int h) : Group(x, y, w, h) {
+PresetColorSelector::PresetColorSelector(int x, int y, int w, int h) : Group(x, y, w, h) {
     redButton = new Button(x, y, 50, 50, "");
     orangeButton = new Button(x + 50, y, 50, 50, "");
     yellowButton = new Button(x + 100, y, 50, 50, "");
