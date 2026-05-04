@@ -4,6 +4,7 @@
 #include <bobcat_ui/all.h>
 #include <FL/Fl_Slider.H>
 #include <Color.h>
+#include "ColorSelector.h"
 
 class ColorSelector : public bobcat::Group {
     bobcat::Button*  swatch;
@@ -27,9 +28,12 @@ class ColorSelector : public bobcat::Group {
     bobcat::TextBox* gValue;
     bobcat::TextBox* bValue;
 
+    PresetColorSelector* presetSelector;
+
     static void sliderCb(Fl_Widget*, void* self);
     void onSliderChange();
     void onBumpClick(bobcat::Widget* sender);
+    void onPresetChange(bobcat::Widget* sender);
     void refresh();
 
 public:

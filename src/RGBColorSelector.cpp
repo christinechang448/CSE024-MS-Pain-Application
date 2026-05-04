@@ -70,6 +70,15 @@ void ColorSelector::refresh() {
     redraw();
 }
 
+void ColorSelector::onPresetChange(bobcat::Widget* sender) {
+    Color c = presetSelector->getColor();
+    redSlider->value((int)(c.getR() * 255));
+    greenSlider->value((int)(c.getG() * 255));
+    blueSlider->value((int)(c.getB() * 255));
+    refresh();
+    if (onChangeCb) onChangeCb(this);
+}
+
 Color ColorSelector::getColor() const {
     return Color(
         redSlider->value() / 255.0f,
@@ -154,6 +163,10 @@ ColorSelector::ColorSelector(int x, int y, int w, int h) : Group(x, y, w, h) {
     gValue->align(FL_ALIGN_CENTER | FL_ALIGN_INSIDE);
     bValue->align(FL_ALIGN_CENTER | FL_ALIGN_INSIDE);
 
+    // preset color buttons below the value row
+    int presetY = valueY + valueRowH + pad;
+    presetSelector = new PresetColorSelector(x, presetY, w, 50);
+
     // callbacks
     redSlider->callback(&ColorSelector::sliderCb, this);
     greenSlider->callback(&ColorSelector::sliderCb, this);
@@ -165,6 +178,7 @@ ColorSelector::ColorSelector(int x, int y, int w, int h) : Group(x, y, w, h) {
     ON_CLICK(gInc, ColorSelector::onBumpClick);
     ON_CLICK(bDec, ColorSelector::onBumpClick);
     ON_CLICK(bInc, ColorSelector::onBumpClick);
+    ON_CHANGE(presetSelector, ColorSelector::onPresetChange);
 
     refresh();
 }

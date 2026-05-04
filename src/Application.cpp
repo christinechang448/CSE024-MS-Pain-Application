@@ -113,7 +113,7 @@ Application::Application() {
     int toolbarW = 100;
     int canvasW = 400;
     int canvasH = 400;
-    int colorH = 170;
+    int colorH = 230;
 
     int winW = toolbarW + canvasW;
     int winH = canvasH + colorH;

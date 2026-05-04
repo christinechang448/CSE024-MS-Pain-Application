@@ -6,7 +6,7 @@
 #include "Hexagon.h"
 #include <set>
 
-Canvas::Canvas(int x, int y, int w, int h) : Canvas_(x, y, w, h) {
+Canvas::Canvas(int x, int y, int w, int h) {
     current = nullptr;
     selected = nullptr;
 }
