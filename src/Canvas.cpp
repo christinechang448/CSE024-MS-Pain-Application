@@ -6,7 +6,7 @@
 #include "Hexagon.h"
 #include <set>
 
-Canvas::Canvas(int x, int y, int w, int h) {
+Canvas::Canvas(int x, int y, int w, int h) : bobcat::Canvas_(x, y, w, h) {
     current = nullptr;
     selected = nullptr;
 }
