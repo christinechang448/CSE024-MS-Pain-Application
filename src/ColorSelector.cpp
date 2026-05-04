@@ -93,13 +93,15 @@ Color PresetColorSelector::getColor() const {
 }
 
 PresetColorSelector::PresetColorSelector(int x, int y, int w, int h) : Group(x, y, w, h) {
-    redButton = new Button(x, y, 50, 50, "");
-    orangeButton = new Button(x + 50, y, 50, 50, "");
-    yellowButton = new Button(x + 100, y, 50, 50, "");
-    greenButton = new Button(x + 150, y, 50, 50, "");
-    blueButton = new Button(x + 200, y, 50, 50, "");
-    indigoButton = new Button(x + 250, y, 50, 50, "");
-    violetButton = new Button(x + 300, y, 50, 50, "");
+    int bw = w / 2;
+    int bh = 50;
+    redButton    = new Button(x,      y,         bw, bh, "");
+    orangeButton = new Button(x + bw, y,         bw, bh, "");
+    yellowButton = new Button(x,      y + bh,    bw, bh, "");
+    greenButton  = new Button(x + bw, y + bh,    bw, bh, "");
+    blueButton   = new Button(x,      y + 2*bh,  bw, bh, "");
+    indigoButton = new Button(x + bw, y + 2*bh,  bw, bh, "");
+    violetButton = new Button(x,      y + 3*bh,  bw, bh, "");
 
     color = RED;
 

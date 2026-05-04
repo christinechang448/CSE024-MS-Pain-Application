@@ -105,6 +105,11 @@ void Application::onColorChange(bobcat::Widget* sender) {
     }
 }
 
+void Application::onPresetChange(bobcat::Widget* sender) {
+    Color c = presetSelector->getColor();
+    colorSelector->setColor(c.getR(), c.getG(), c.getB());
+}
+
 Application::Application() {
     lastMx = 0;
     lastMy = 0;
@@ -113,7 +118,8 @@ Application::Application() {
     int toolbarW = 100;
     int canvasW = 400;
     int canvasH = 400;
-    int colorH = 230;
+    int colorH = 200;
+    int toolbarButtonH = 400;
 
     int winW = toolbarW + canvasW;
     int winH = canvasH + colorH;
@@ -124,16 +130,19 @@ Application::Application() {
     toolbar = new Toolbar(0, 0, toolbarW, winH);
     colorSelector = new ColorSelector(toolbarW, canvasH, canvasW, colorH);
     colorSelector->box(FL_BORDER_BOX);
+    presetSelector = new PresetColorSelector(0, toolbarButtonH, toolbarW, winH - toolbarButtonH);
 
     window->add(canvas);
     window->add(toolbar);
     window->add(colorSelector);
+    window->add(presetSelector);
 
     ON_MOUSE_DOWN(canvas, Application::onCanvasMouseDown);
     ON_DRAG(canvas, Application::onCanvasDrag);
     ON_MOUSE_UP(canvas, Application::onCanvasMouseUp);
     ON_CHANGE(toolbar, Application::onToolbarChange);
     ON_CHANGE(colorSelector, Application::onColorChange);
+    ON_CHANGE(presetSelector, Application::onPresetChange);
 
     window->show();
 }

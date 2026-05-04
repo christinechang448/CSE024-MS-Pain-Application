@@ -28,18 +28,16 @@ class ColorSelector : public bobcat::Group {
     bobcat::TextBox* gValue;
     bobcat::TextBox* bValue;
 
-    PresetColorSelector* presetSelector;
-
     static void sliderCb(Fl_Widget*, void* self);
     void onSliderChange();
     void onBumpClick(bobcat::Widget* sender);
-    void onPresetChange(bobcat::Widget* sender);
     void refresh();
 
 public:
     ColorSelector(int x, int y, int w, int h);
 
     Color getColor() const;
+    void setColor(float r, float g, float b);
 };
 
 #endif
